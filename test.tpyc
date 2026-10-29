@@ -1,0 +1,35 @@
+sub int particionar(int[] array, int inicio, int fim)
+    int pivo = array[fim]
+    int i = inicio - 1
+    int j = inicio
+    
+    while (j < fim)
+        if (array[j] <= pivo)
+            i = i + 1
+            swap(array[i], array[j])
+        endif
+        j = j + 1
+    endwhile
+    swap(array[i + 1], array[fim])
+    return i + 1
+endsub
+
+sub quicksort(int[] array, int inicio, int fim)
+    if (inicio < fim)
+        int indice_pivo = particionar(array, inicio, fim)
+        
+        quicksort(array, inicio, indice_pivo - 1)
+        quicksort(array, indice_pivo + 1, fim)
+    endif
+endsub
+
+main()
+    int[] array = [10, 7, 8, 9, 1, 5]
+    int tamanho = comprimento(array)
+    
+    print("Array original: ", array)
+
+    quicksort(array, 0, tamanho - 1)
+    
+    print("Array ordenado: ", array)
+endmain
